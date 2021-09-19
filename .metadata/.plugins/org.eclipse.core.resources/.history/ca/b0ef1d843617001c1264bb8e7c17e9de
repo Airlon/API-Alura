@@ -1,0 +1,30 @@
+package br.com.alura.config.security;
+
+import java.util.Date;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
+
+import br.com.alura.modelo.Usuario;
+import io.jsonwebtoken.Jwts;
+
+@Service
+public class TokenServices {
+	
+	
+
+	public String gerarToken(Authentication authentication) {
+		Usuario logado = (Usuario) authentication.getPrincipal();
+		Date hoje = new Date();
+		
+		
+		return Jwts.builder()
+		.setIssuer("API do forum da Alura")
+		.setSubject(logado.getId().toString())
+		.setIssuedAt(hoje)
+		.setExpiration(hoje)
+		
+		
+	}
+
+}
